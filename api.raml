@@ -1,0 +1,140 @@
+#%RAML 1.0
+title: APK API
+version: 1.0
+baseUri: http://127.0.0.1:8000/apk/
+description: by Yaroslav Lukyanchuk
+
+uses:
+  assets:  assets.lib.raml
+
+/settings/event-program/reports:
+  displayName: Event Program Reports
+  description: Settings admin mobile-app page - event program reports
+  get:
+    is: [ assets.paging]
+    description: list all reports
+    queryParameters:
+      user_id:
+        type: int
+        description: use user id
+        required: true
+        example: 5
+      event_id:
+        type: int
+        description: use event id
+        required: false
+        example: 3200
+      search:
+        type: string
+        description: search query
+        required: false
+        example: Demo
+      per_page:
+        type: int
+        description: count item on page
+        required: false
+        example: 10
+      page:
+        type: int
+        description: set cyrrent page
+        required: false
+        example: 2
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              get-reports:
+                success: true
+                data:
+                  data:
+                  - 
+                    id: 10
+                    title: Demo
+                    time_report: '2022-02-22 12:18:13'
+                    file: http://127.0.0.1:8000/storage/files/Screenshot 2022-02-22 at 10.12.51_1645537041.png
+                    speaker:
+                      id: 119
+                      user_id: 5
+                      event_id: 3200
+                      created_at:
+                      updated_at:
+                      full_name: ''
+                  pagination:
+                    total: 1
+                    total_pages: 1
+                    per_page: 2
+                    current_page: 1
+                    current_per_page: 1
+                info: Apk Settings Event Program Reports API
+                message: Get Event Program Reports
+  post:
+    is: [ assets.paging]
+    description: store event program report
+    queryParameters:
+      title:
+        type: string
+        description: title event program report
+        required: true
+        example: My Report Title
+      time_report:
+        type: datetime
+        description: start event program report
+        required: true
+        example: 2022-02-22 12:18:13
+      speaker_user_id:
+        type: int
+        description: speaker id
+        required: true
+        example: 2
+      file:
+        type: file
+        description: file(image, pdf or other)
+        required: true
+        example: image.png
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              store-report:
+                success: true
+                data:
+                  id: 12
+                  title: Report Title
+                  time_report: '2022-02-22 12:18:13'
+                  file: http://127.0.0.1:8000/storage/files/Screenshot 2022-02-22 at 10.12.51_1645537041.png
+                  speaker:
+                    id: 118
+                    user_id: 2
+                    event_id: 3200
+                    created_at:
+                    updated_at:
+                    full_name: 'edit full_name'
+                info: Apk Settings Event Program Reports API
+                message: Store Event Program Reports
+  delete:
+    is: [assets.paging]
+    description: delete event program report
+    queryParameters:
+      report_id:
+        type: int
+        description: id report
+        required: true
+        example: 11
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              delete-report:
+                success: true
+                data: []
+                info: Apk Settings Event Program Reports API
+                message: Delete Event Program Reports
+    
+      
+

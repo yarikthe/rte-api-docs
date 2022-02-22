@@ -1,0 +1,28 @@
+#%RAML 1.0 Library
+
+types:
+  Report:
+    type: object
+    properties:
+      id:integer
+      title: string
+      time_report: creation_date
+      file: string
+  Reports:
+    type: object
+    properties:
+      data: Report[]
+
+traits:
+  paging:
+    queryParameters:
+      size:
+        description: the amount of elements of each result page
+        type: integer
+        required: false
+        example: 10
+      page:
+        description: the page number
+        type: integer
+        required: false
+        example: 0
