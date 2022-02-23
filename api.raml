@@ -137,4 +137,116 @@ uses:
                 message: Delete Event Program Reports
     
       
+/settings/ticket-schema-notification:
+  displayName: Ticket Shema Notification
+  description: Settings Notification in https://a.rte.im/#/event/3200/mobile-app
+  get:
+    is: [ assets.paging]
+    description: Get List Ticket Shema Notification - http://127.0.0.1:8000/apk/settings/ticket-schema-notification/?event_id={event_id}
+    queryParameters:
+      event_id:
+        type: int
+        description: use event id
+        required: true
+        example: 3200
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              get-ticket-schema-notification:
+                success: true
+                data: 
+                  id: 3
+                  ticket_schema_list: [1,2]
+                  ticket_option_list: [2,3]
+                  time_send: "2022-02-23 18:14:11"
+                  event_id: 3200
+                  event: [data]
+                info: Apk Ticket Schema Notification API
+                message: Get Ticket Schema Notification
+  delete:
+    is: [assets.paging]
+    description: Delete Ticket Shema Notification - http://127.0.0.1:8000/apk/settings/ticket-schema-notification/{atsn_id}
+    queryParameters:
+      atsn_id:
+        type: int
+        description: ID apk_ticket_schema_notification
+        required: true
+        example: 3
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              delete-data:
+                success: true
+                data: []
+                info: Apk Ticket Schema Notification API
+                message: Delete Ticket Schema Notification
+  post:
+    is: [assets.paging]
+    description: Store Ticket Shema Notification - http://127.0.0.1:8000/apk/settings/ticket-schema-notification/
+    queryParameters:
+      event_id:
+        type: int
+        description: ID Event
+        required: true
+        example: 3200
+      message:
+        type: string
+        description: Text of notification
+        required: true
+        example: My sample text
+      ticket_schema_list:
+        type: array
+        description: List ticket_schema_id's
+        required: true
+        example: ticket_schema_list [3,2]
+      ticket_option_list:
+        type: array
+        description: List ticket_option_id's
+        required: false
+        example: ticket_option_list [1,2]
+      time_send:
+        type: dateTime
+        description: DateTime send notification
+        required: true
+        example: "2022-02-23 18:14:11"
+      is_send:
+        type: int
+        description: send notification
+        required: true
+        example: isSend 1
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            examples:
+              example-send-data:
+                event_id: 3200
+                message: Postman json text
+                ticket_schema_list:
+                - 1
+                - 2
+                ticket_option_list:
+                - 3
+                - 2
+                - 12
+                time_send: '2022-02-23 18:14:11'
+                isSend: 1
+              example-response-data:
+                success: true
+                data:
+                  id: 12
+                  ticket_schema_list: "[1,2]"
+                  ticket_option_list: "[3,2,12]"
+                  time_send: '2022-02-23 18:14:11'
+                  event_id: 3200
+                  event: (i)full data if need will be included
+                info: Apk Ticket Schema Notification API
+                message: Sotre Ticket Schema Notification
 
